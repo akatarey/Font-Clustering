@@ -25,14 +25,3 @@ try:
      img.save(str(out_path) + "\\" + font_name + ".png")
 except:
      print(f"[-] Couldn't save font image")
-
-
-#for character in desired_characters:
- #   width, height = font.getsize(character)
-  #  img = Image.new("RGBA", (width * 70, height * 70))
-   # draw = ImageDraw.Draw(img)
-    #draw.text((-2, -2), str(character), font=font, fill=font_color)
-    #try:
-     #   img.save(str(out_path) + "\\" + str(ord(character)) + ".png")
-    #except:
-     #   print(f"[-] Couldn't save:\t{character}")
