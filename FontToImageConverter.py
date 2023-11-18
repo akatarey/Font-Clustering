@@ -6,8 +6,8 @@ import pandas as pd
 import pickle
 from PIL import Image, ImageFont, ImageDraw
 
-font_path = Path("C:/Users/arkin/Desktop/Fonts/Roboto-Regular.ttf")
-font_name = "Roboto-Regular"
+font_name = str(input())
+font_path = Path("C:/Users/arkin/Desktop/Fonts/"+ font_name + ".ttf")
 out_path = Path("C:/Users/arkin/Desktop/Fonts")
 
 font_size = 16 #px
