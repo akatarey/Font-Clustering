@@ -19,7 +19,7 @@ desired_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456
 
 for character in desired_characters:
     width, height = font.getsize(character)
-    img = Image.new("RGBA", (width, height))
+    img = Image.new("RGBA", (width * 70, height * 70))
     draw = ImageDraw.Draw(img)
     draw.text((-2, -2), str(character), font=font, fill=font_color)
     try:
