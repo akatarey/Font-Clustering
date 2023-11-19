@@ -41,4 +41,14 @@ def extract_features(file, model):
     features = model.predict(x, use_multiprocessing=True)
     return features
 
-print(extract_features(font_imgs[0], model))
+data = {}
+
+for font in font_imgs:
+    feat = extract_features(font, model)
+    data[font] = feat
+
+filenames = np.array(list(data.keys())) #Save filenames as NumPy array
+
+features = np.array(list(data.values()))
+features = features.reshape(-1, 4096)
+print(feat.shape)
