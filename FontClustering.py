@@ -26,10 +26,19 @@ with os.scandir(path) as files: #Scans through directory looking for png files
         if file.name.endswith(".png"):
             font_imgs.append(file.name)
 
-img = load_img(font_imgs[0], target_size=(224, 224)) #VGG model expects images to be 224x224 NumPy arrays
-img = np.array(img) #This np array only has 3 dimensions, model needs batches
-#Model needs 4 dimensions: Number of Images, Number of rows, number of columns, number of channels
-img = img.reshape(1, 224, 224, 3) 
+#load model
+model = VGG16()
+model = Model(inputs=model.inputs, outputs=model.layers[-2].output) #Remove output layer
 
-x = preprocess_input(img)
+def extract_features(file, model):
+    img = load_img(file, target_size=(224, 224)) #VGG model expects images to be 224x224 NumPy arrays
+    img = np.array(img) #This np array only has 3 dimensions, model needs batches
+    #Model needs 4 dimensions: Number of Images, Number of rows, number of columns, number of channels
+    img = img.reshape(1, 224, 224, 3) 
 
+    x = preprocess_input(img)
+
+    features = model.predict(x, use_multiprocessing=True)
+    return features
+
+print(extract_features(font_imgs[0], model))
