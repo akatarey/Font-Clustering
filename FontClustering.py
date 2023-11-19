@@ -18,12 +18,18 @@ import pickle
 #Convert ttf into image files, then plug in
 
 path = Path("C:/Users/arkin/Desktop/Fonts")
-os.chdir(path)
+os.chdir(path)  #Changes current path of process from FontClustering.py's filepath to the Fonts filepath
 
 font_imgs = []
-with os.scandir(path) as files:
+with os.scandir(path) as files: #Scans through directory looking for png files
     for file in files:
         if file.name.endswith(".png"):
             font_imgs.append(file.name)
 
-print(font_imgs)
+img = load_img(font_imgs[0], target_size=(224, 224)) #VGG model expects images to be 224x224 NumPy arrays
+img = np.array(img) #This np array only has 3 dimensions, model needs batches
+#Model needs 4 dimensions: Number of Images, Number of rows, number of columns, number of channels
+img = img.reshape(1, 224, 224, 3) 
+
+x = preprocess_input(img)
+
